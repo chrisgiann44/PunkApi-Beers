@@ -1,7 +1,7 @@
 import React from "react";
 import axios from "axios";
 import Info from "./components/Info";
-import Filter from "./components/Filter";
+import Filters from "./components/Filters";
 import { CSSTransition } from "react-transition-group";
 
 class App extends React.Component {
@@ -14,7 +14,8 @@ class App extends React.Component {
       currentPage: 1,
       numberOfPages: 33,
       numberOfResults: 325,
-      beersFromSearchResults: []
+      beersFromSearchResults: [],
+      bringElements: false
     };
   }
 
@@ -86,14 +87,14 @@ class App extends React.Component {
             beersFromSearchResults: res.data,
             numberOfPages: Math.ceil(res.data.length / 10),
             numberOfResults: res.data.length,
-            currentPage:1
+            currentPage: 1
           });
         });
     } else {
       this.getTenBeersByPage(1);
       this.setState({
         beersFromSearchResults: [],
-        currentPage:1
+        currentPage: 1
       });
     }
   };
@@ -156,7 +157,7 @@ class App extends React.Component {
       beers: sorted.slice(0, 10),
       beersFromSearchResults: sorted,
       sortProperty: sortProperty,
-      currentPage:1
+      currentPage: 1
     });
   };
 
@@ -231,6 +232,7 @@ class App extends React.Component {
 
   componentDidMount() {
     this.getTenBeersByPage(1);
+    this.setState({ bringElements: true });
   }
 
   render() {
@@ -238,112 +240,131 @@ class App extends React.Component {
       <React.Fragment>
         <div className="container">
           {/* Filter Div on the left */}
-          <Filter
-            getBeersByName={this.getBeersByName}
-            getBeersByBrewDate={this.getBeersByBrewDate}
-          />
+          <CSSTransition
+            in={this.state.bringElements}
+            timeout={1000}
+            classNames="filters"
+            mountOnEnter
+            appear
+            unmountOnExit
+          >
+            <Filters
+              getBeersByName={this.getBeersByName}
+              getBeersByBrewDate={this.getBeersByBrewDate}
+              getTenBeersByPage={this.getTenBeersByPage}
+            />
+          </CSSTransition>
           {/* Results on the right */}
-          <div className="display">
-            <div className="results">
-              {/* Header */}
-              <div className=" header">
-                <div>
-                  {!!this.state.beersFromSearchResults.length && (
-                    <img
-                      onClick={e => this.sortResults(e.target.name)}
-                      id="sort"
-                      name="id"
-                      src="./sorticon.png"
-                      alt="foto"
-                    />
-                  )}
-                  Id
+          <CSSTransition
+            in={this.state.bringElements}
+            timeout={1000}
+            classNames="display"
+            mountOnEnter
+            appear
+            unmountOnExit
+          >
+            <div className="display">
+              <div className="results">
+                {/* Header */}
+                <div className=" header">
+                  <div>
+                    {!!this.state.beersFromSearchResults.length && (
+                      <img
+                        onClick={e => this.sortResults(e.target.name)}
+                        id="sort"
+                        name="id"
+                        src="./sorticon.png"
+                        alt="foto"
+                      />
+                    )}
+                    Id
+                  </div>
+                  <div>
+                    {!!this.state.beersFromSearchResults.length && (
+                      <img
+                        onClick={e => this.sortResults(e.target.name)}
+                        id="sort"
+                        name="name"
+                        src="./sorticon.png"
+                        alt="foto"
+                      />
+                    )}
+                    Name
+                  </div>
+                  <div>
+                    {!!this.state.beersFromSearchResults.length && (
+                      <img
+                        onClick={e => this.sortResults(e.target.name)}
+                        id="sort"
+                        name="first_brewed"
+                        src="./sorticon.png"
+                        alt="foto"
+                      />
+                    )}
+                    First Brewed
+                  </div>
+                  <div>
+                    {!!this.state.beersFromSearchResults.length && (
+                      <img
+                        onClick={e => this.sortResults(e.target.name)}
+                        id="sort"
+                        name="abv"
+                        src="./sorticon.png"
+                        alt="foto"
+                      />
+                    )}
+                    ABV
+                  </div>
+                  <div>
+                    {!!this.state.beersFromSearchResults.length && (
+                      <img
+                        onClick={e => this.sortResults(e.target.name)}
+                        id="sort"
+                        name="ibu"
+                        src="./sorticon.png"
+                        alt="foto"
+                      />
+                    )}
+                    IBU
+                  </div>
                 </div>
-                <div>
-                  {!!this.state.beersFromSearchResults.length && (
-                    <img
-                      onClick={e => this.sortResults(e.target.name)}
-                      id="sort"
-                      name="name"
-                      src="./sorticon.png"
-                      alt="foto"
-                    />
-                  )}
-                  Name
-                </div>
-                <div>
-                  {!!this.state.beersFromSearchResults.length && (
-                    <img
-                      onClick={e => this.sortResults(e.target.name)}
-                      id="sort"
-                      name="first_brewed"
-                      src="./sorticon.png"
-                      alt="foto"
-                    />
-                  )}
-                  First Brewed
-                </div>
-                <div>
-                  {!!this.state.beersFromSearchResults.length && (
-                    <img
-                      onClick={e => this.sortResults(e.target.name)}
-                      id="sort"
-                      name="abv"
-                      src="./sorticon.png"
-                      alt="foto"
-                    />
-                  )}
-                  ABV
-                </div>
-                <div>
-                  {!!this.state.beersFromSearchResults.length && (
-                    <img
-                      onClick={e => this.sortResults(e.target.name)}
-                      id="sort"
-                      name="ibu"
-                      src="./sorticon.png"
-                      alt="foto"
-                    />
-                  )}
-                  IBU
-                </div>
-              </div>
-              {/* Results */}
-              {!this.state.beers.length && (
-                <h1 style={{ color: "red" }}>
-                  No Beers for you mate!Sorry! try again
-                </h1>
-              )}
-              {this.state.beers.map(beer => (
-                <div
-                  className="result"
-                  id={beer.id}
-                  key={beer.id}
-                  onClick={this.setBeerToShow}
-                >
-                  <div id={beer.id}>{beer.id}</div>
-                  <div id={beer.id}>{beer.name}</div>
-                  <div id={beer.id}>{beer.first_brewed}</div>
-                  <div id={beer.id}>{beer.abv}</div>
-                  <div id={beer.id}>{beer.ibu}</div>
-                </div>
-              ))}
-            </div>
-            {/* Pagination */}
-            {!!this.state.beers.length && (
-              <div className="pagination">
-                <h4 onClick={this.paginateLeft}>{"<<"} Prev</h4>
-                <p>{this.state.currentPage}</p>
-                {this.state.numberOfPages !== 0 && (
-                  <p>
-                    of {this.state.numberOfPages} Pages and{" "}
-                    {this.state.numberOfResults} Beers
-                  </p>
+                {/* Results */}
+                {!this.state.beers.length && (
+                  <h1 style={{ color: "red" }}>
+                    No Beers for you mate!Sorry! try again
+                  </h1>
                 )}
-                <h4 onClick={this.paginateRight}>Next {">>"}</h4>
+                {this.state.beers.map(beer => (
+                  <div
+                    className="result"
+                    id={beer.id}
+                    key={beer.id}
+                    onClick={this.setBeerToShow}
+                  >
+                    <div id={beer.id}>{beer.id}</div>
+                    <div id={beer.id}>{beer.name}</div>
+                    <div id={beer.id}>{beer.first_brewed}</div>
+                    <div id={beer.id}>{beer.abv}</div>
+                    <div id={beer.id}>{beer.ibu}</div>
+                  </div>
+                ))}
               </div>
-            )}
-          </div>
+              {/* Pagination */}
+              {!!this.state.beers.length && (
+                <div className="pagination">
+                  <h4 onClick={this.paginateLeft}>{"<<"} Prev</h4>
+                  <p>{this.state.currentPage}</p>
+                  {this.state.numberOfPages !== 0 && (
+                    <p>
+                      of {this.state.numberOfPages} Pages and{" "}
+                      {this.state.numberOfResults} Beers
+                    </p>
+                  )}
+                  <h4 onClick={this.paginateRight}>Next {">>"}</h4>
+                </div>
+              )}
+            </div>
+          </CSSTransition>
           {/* Popup Window */}
           <CSSTransition
             in={this.state.visible}

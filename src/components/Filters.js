@@ -1,8 +1,11 @@
 import React from "react";
 
-class Filter extends React.Component {
+class Filters extends React.Component {
   constructor(props) {
     super(props);
+    this.name = React.createRef();
+    this.month = React.createRef();
+    this.year = React.createRef();
     this.state = {
       month: 0,
       year: 0,
@@ -36,7 +39,7 @@ class Filter extends React.Component {
 
   // Validates the year and returns true or false
   validateYear = ({ target: { value } }) => {
-    if (!value.match(/(^[12][0-9]{3}$)/) && value !== "") {
+    if (!value.match(/(^[12][0-9]{3}$)/) && value !== "" && value.length > 3) {
       this.setState({ yearError: true });
       return false;
     } else {
@@ -49,14 +52,17 @@ class Filter extends React.Component {
     return (
       <React.Fragment>
         <div className="filters">
-          <h1>Filter your List</h1>
+          <h2>Filter your List</h2>
           {/* Beer Filter */}
           <div className="filter">
             <h2>Beer Name</h2>
             <input
               placeholder="Enter the name of your Beer"
               name="name"
+              ref={this.name}
               onChange={e => {
+                this.month.current.value = "";
+                this.year.current.value = "";
                 if (this.validateName(e)) {
                   this.props.getBeersByName(e.target.value);
                 }
@@ -72,8 +78,10 @@ class Filter extends React.Component {
             <input
               placeholder="MM"
               name="month"
+              ref={this.month}
               maxLength="2"
               onChange={e => {
+                this.name.current.value = "";
                 if (this.validateMonth(e)) {
                   if (e.target.value.length === 1) {
                     this.setState({ month: 0 + e.target.value });
@@ -84,8 +92,10 @@ class Filter extends React.Component {
             <input
               placeholder="YYYY"
               name="year"
+              ref={this.year}
               maxLength="4"
               onChange={e => {
+                this.name.current.value = "";
                 if (this.validateYear(e)) {
                   this.setState({ year: e.target.value });
                 }
@@ -94,11 +104,15 @@ class Filter extends React.Component {
             <button
               onClick={e => {
                 e.preventDefault();
-                this.props.getBeersByBrewDate(
-                  this.state.month,
-                  this.state.year,
-                  "before"
-                );
+                if (this.state.monthError || this.state.yearError) {
+                  return;
+                } else {
+                  this.props.getBeersByBrewDate(
+                    this.state.month,
+                    this.state.year,
+                    "before"
+                  );
+                }
               }}
             >
               Before this date
@@ -106,11 +120,15 @@ class Filter extends React.Component {
             <button
               onClick={e => {
                 e.preventDefault();
-                this.props.getBeersByBrewDate(
-                  this.state.month,
-                  this.state.year,
-                  "after"
-                );
+                if (this.state.monthError || this.state.yearError) {
+                  return;
+                } else {
+                  this.props.getBeersByBrewDate(
+                    this.state.month,
+                    this.state.year,
+                    "after"
+                  );
+                }
               }}
             >
               After this date
@@ -122,10 +140,25 @@ class Filter extends React.Component {
               <p style={{ color: "red" }}>Please insert a valid Year</p>
             )}
           </div>
+          {/* Reset Button */}
+          <div>
+            <button
+              onClick={e => {
+                e.preventDefault();
+                this.name.current.value = "";
+                this.month.current.value = "";
+                this.year.current.value = "";
+                this.props.getTenBeersByPage(1);
+                this.setState({ monthError: false, yearError: false });
+              }}
+            >
+              Reset Filters
+            </button>
+          </div>
         </div>
       </React.Fragment>
     );
   }
 }
 
-export default Filter;
+export default Filters;
