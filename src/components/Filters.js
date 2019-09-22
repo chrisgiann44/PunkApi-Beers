@@ -1,14 +1,28 @@
 import React from "react";
 
+let initialState = {
+  monthBefore: "",
+  yearBefore: "",
+  monthAfter: "",
+  yearAfter: "",
+  nameError: false,
+  monthError: false,
+  yearError: false
+};
+
 class Filters extends React.Component {
   constructor(props) {
     super(props);
     this.name = React.createRef();
-    this.month = React.createRef();
-    this.year = React.createRef();
+    this.monthBefore = React.createRef();
+    this.yearBefore = React.createRef();
+    this.monthAfter = React.createRef();
+    this.yearAfter = React.createRef();
     this.state = {
-      month: 0,
-      year: 0,
+      monthBefore: "",
+      yearBefore: "",
+      monthAfter: "",
+      yearAfter: "",
       nameError: false,
       monthError: false,
       yearError: false
@@ -28,7 +42,7 @@ class Filters extends React.Component {
 
   // Validates the month and returns true or false
   validateMonth = ({ target: { value } }) => {
-    if (!value.match(/(^0?[1-9]$)|(^1[0-2]$)/) && value !== "") {
+    if (!value.match(/(^0?[1-9]$)|(^1[0-2]$)/) && value.length > 1) {
       this.setState({ monthError: true });
       return false;
     } else {
@@ -39,7 +53,7 @@ class Filters extends React.Component {
 
   // Validates the year and returns true or false
   validateYear = ({ target: { value } }) => {
-    if (!value.match(/(^[12][0-9]{3}$)/) && value !== "" && value.length > 3) {
+    if (!value.match(/(^[12][0-9]{3}$)/) && value.length > 3) {
       this.setState({ yearError: true });
       return false;
     } else {
@@ -48,7 +62,23 @@ class Filters extends React.Component {
     }
   };
 
+  // Handle the change of the inputs
+  handlechange = e => {
+    if (e.target.id === "month") {
+      if (this.validateMonth(e)) {
+        if (e.target.value.length === 1) {
+          this.setState({ [e.target.name]: 0 + e.target.value });
+        } else this.setState({ [e.target.name]: e.target.value });
+      }
+    } else {
+      if (this.validateYear(e)) {
+        this.setState({ [e.target.name]: e.target.value });
+      }
+    }
+  };
+
   render() {
+    console.log(this.state);
     return (
       <React.Fragment>
         <div className="filters">
@@ -61,9 +91,12 @@ class Filters extends React.Component {
               name="name"
               ref={this.name}
               onChange={e => {
-                this.month.current.value = "";
-                this.year.current.value = "";
+                this.monthBefore.current.value = "";
+                this.yearBefore.current.value = "";
+                this.monthAfter.current.value = "";
+                this.yearAfter.current.value = "";
                 if (this.validateName(e)) {
+                  this.setState({ ...initialState, name: e.target.value });
                   this.props.getBeersByName(e.target.value);
                 }
               }}
@@ -75,31 +108,39 @@ class Filters extends React.Component {
           {/* Date Filter */}
           <div className="filter">
             <h2>Brew Date</h2>
+            <p>Between</p>
             <input
               placeholder="MM"
-              name="month"
-              ref={this.month}
+              name="monthAfter"
+              id="month"
+              ref={this.monthBefore}
               maxLength="2"
-              onChange={e => {
-                this.name.current.value = "";
-                if (this.validateMonth(e)) {
-                  if (e.target.value.length === 1) {
-                    this.setState({ month: 0 + e.target.value });
-                  } else this.setState({ month: e.target.value });
-                }
-              }}
+              onChange={this.handlechange}
             />
             <input
               placeholder="YYYY"
-              name="year"
-              ref={this.year}
+              name="yearAfter"
+              id="year"
+              ref={this.yearBefore}
               maxLength="4"
-              onChange={e => {
-                this.name.current.value = "";
-                if (this.validateYear(e)) {
-                  this.setState({ year: e.target.value });
-                }
-              }}
+              onChange={this.handlechange}
+            />
+            <p>And</p>
+            <input
+              placeholder="MM"
+              name="monthBefore"
+              id="month"
+              ref={this.monthAfter}
+              maxLength="2"
+              onChange={this.handlechange}
+            />
+            <input
+              placeholder="YYYY"
+              name="yearBefore"
+              id="year"
+              ref={this.yearAfter}
+              maxLength="4"
+              onChange={this.handlechange}
             />
             <button
               onClick={e => {
@@ -107,41 +148,21 @@ class Filters extends React.Component {
                 if (
                   this.state.monthError ||
                   this.state.yearError ||
-                  this.state.month === 0 ||
-                  this.state.year === 0
+                  (this.state.yearAfter === "" && this.state.yearBefore === "")
                 ) {
                   return;
                 } else {
                   this.props.getBeersByBrewDate(
-                    this.state.month,
-                    this.state.year,
-                    "before"
+                    this.state.monthBefore || "01",
+                    this.state.yearBefore,
+                    this.state.monthAfter || "01",
+                    this.state.yearAfter,
+                    this.state.name
                   );
                 }
               }}
             >
-              Before this date
-            </button>
-            <button
-              onClick={e => {
-                e.preventDefault();
-                if (
-                  this.state.monthError ||
-                  this.state.yearError ||
-                  this.state.month === 0 ||
-                  this.state.year === 0
-                ) {
-                  return;
-                } else {
-                  this.props.getBeersByBrewDate(
-                    this.state.month,
-                    this.state.year,
-                    "after"
-                  );
-                }
-              }}
-            >
-              After this date
+              Apply Filter
             </button>
             {this.state.monthError && (
               <p style={{ color: "red" }}>Please insert a valid Month</p>
@@ -156,11 +177,13 @@ class Filters extends React.Component {
               onClick={e => {
                 e.preventDefault();
                 this.name.current.value = "";
-                this.month.current.value = "";
-                this.year.current.value = "";
+                this.monthBefore.current.value = "";
+                this.yearBefore.current.value = "";
+                this.monthAfter.current.value = "";
+                this.yearAfter.current.value = "";
                 this.props.resetResults();
                 this.props.getTenBeersByPage(this.props.currentPage);
-                this.setState({ monthError: false, yearError: false });
+                this.setState(initialState);
               }}
             >
               Reset Filters

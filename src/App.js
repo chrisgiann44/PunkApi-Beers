@@ -94,24 +94,52 @@ class App extends React.Component {
       this.getTenBeersByPage(1);
       this.setState({
         beersFromSearchResults: [],
-        currentPage: 1
+        currentPage: 1,
+        sortProperty: ""
       });
     }
   };
 
   // Get results of beers based on the Brew Date
-  getBeersByBrewDate = (month, year, when) => {
+  getBeersByBrewDate = (
+    monthBefore,
+    yearBefore,
+    monthAfter,
+    yearAfter,
+    name
+  ) => {
+    let lastPartOfUrl = "";
+    if (yearBefore && !yearAfter) {
+      lastPartOfUrl = "brewed_before=" + monthBefore + "-" + yearBefore;
+    } else if (!yearBefore && yearAfter) {
+      lastPartOfUrl = "brewed_after=" + monthAfter + "-" + yearAfter;
+    } else {
+      lastPartOfUrl =
+        "brewed_before=" +
+        monthBefore +
+        "-" +
+        yearBefore +
+        "&brewed_after=" +
+        monthAfter +
+        "-" +
+        yearAfter;
+    }
+    console.log(name.length);
+
+    let finalUrl = name ? lastPartOfUrl + "&beer_name=" + name : lastPartOfUrl;
+    console.log(finalUrl);
+
     axios
-      .get(
-        `https://api.punkapi.com/v2/beers?brewed_${when}=${month} -
-          ${year}&page=1&per_page=80`
-      )
+      .get(`https://api.punkapi.com/v2/beers?page=1&per_page=80&${finalUrl}`)
       .then(res => {
+        console.log(res.data);
+
         this.setState({
           beers: res.data.slice(0, 10),
           beersFromSearchResults: res.data,
           numberOfPages: Math.ceil(res.data.length / 10),
-          numberOfResults: res.data.length
+          numberOfResults: res.data.length,
+          sortProperty: ""
         });
       });
   };
@@ -130,8 +158,11 @@ class App extends React.Component {
     }
     if (sortProperty === "name") {
       if (this.state.sortProperty === "name") {
+        console.log("mesa");
+
         sorted = this.state.beersFromSearchResults.reverse();
       } else {
+        console.log("eksw");
         sorted = this.state.beersFromSearchResults.sort((a, b) =>
           a.name < b.name ? -1 : a.name > b.name ? 1 : 0
         );

@@ -25,6 +25,15 @@ body h1 {
   box-shadow: 10px 9px 22px 2px rgba(255, 255, 255, 0.75);
 }
 
+.filter p,
+h2 {
+  margin: 5px;
+}
+
+.filter p {
+  font-size: 20px;
+}
+
 .display {
   position: relative;
   background-color: #3c9d9b;
