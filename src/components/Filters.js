@@ -148,7 +148,7 @@ class Filters extends React.Component {
                 this.name.current.value = "";
                 this.month.current.value = "";
                 this.year.current.value = "";
-                this.props.getTenBeersByPage(1);
+                this.props.getTenBeersByPage(this.props.currentPage);
                 this.setState({ monthError: false, yearError: false });
               }}
             >

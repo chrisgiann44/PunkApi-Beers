@@ -123,7 +123,18 @@ class App extends React.Component {
       if (this.state.sortProperty === "id") {
         sorted = this.state.beersFromSearchResults.reverse();
       } else {
-        sorted = this.state.beersFromSearchResults.sort((a, b) => a.id - b.id);
+        sorted = this.state.beersFromSearchResults.sort((a, b) =>
+          a.id < b.id ? -1 : a.id > b.id ? 1 : 0
+        );
+      }
+    }
+    if (sortProperty === "name") {
+      if (this.state.sortProperty === "name") {
+        sorted = this.state.beersFromSearchResults.reverse();
+      } else {
+        sorted = this.state.beersFromSearchResults.sort((a, b) =>
+          a.name < b.name ? -1 : a.name > b.name ? 1 : 0
+        );
       }
     }
     if (sortProperty === "first_brewed") {
@@ -139,8 +150,8 @@ class App extends React.Component {
       if (this.state.sortProperty === "abv") {
         sorted = this.state.beersFromSearchResults.reverse();
       } else {
-        sorted = this.state.beersFromSearchResults.sort(
-          (a, b) => a.abv - b.abv
+        sorted = this.state.beersFromSearchResults.sort((a, b) =>
+          a.abv < b.abv ? -1 : a.abv > b.abv ? 1 : 0
         );
       }
     }
@@ -148,8 +159,8 @@ class App extends React.Component {
       if (this.state.sortProperty === "ibu") {
         sorted = this.state.beersFromSearchResults.reverse();
       } else {
-        sorted = this.state.beersFromSearchResults.sort(
-          (a, b) => a.ibu - b.ibu
+        sorted = this.state.beersFromSearchResults.sort((a, b) =>
+          a.ibu < b.ibu ? -1 : a.ibu > b.ibu ? 1 : 0
         );
       }
     }
@@ -249,6 +260,7 @@ class App extends React.Component {
             unmountOnExit
           >
             <Filters
+              currentPage={this.state.currentPage}
               getBeersByName={this.getBeersByName}
               getBeersByBrewDate={this.getBeersByBrewDate}
               getTenBeersByPage={this.getTenBeersByPage}
