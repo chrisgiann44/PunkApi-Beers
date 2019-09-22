@@ -22,7 +22,7 @@ body h1 {
   background-color: #52de97;
   width: 20%;
   border-radius: 25px;
-  box-shadow: 10px 9px 22px 2px rgba(0, 0, 0, 0.75);
+  box-shadow: 10px 9px 22px 2px rgba(255, 255, 255, 0.75);
 }
 
 .display {
@@ -31,7 +31,7 @@ body h1 {
   width: 70%;
   padding: 1%;
   border-radius: 25px;
-  box-shadow: 10px 9px 22px 2px rgba(0, 0, 0, 0.75);
+  box-shadow: 10px 9px 22px 2px rgba(255, 255, 255, 0.75);
 }
 
 .result {
