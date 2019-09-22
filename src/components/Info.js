@@ -23,7 +23,7 @@ class Info extends React.Component {
         >
           Close[X]
         </div>
-        {/* INFO OF THE BEER */}
+        {/* Info of the selected Beer */}
         <div
           style={{
             display: "flex",

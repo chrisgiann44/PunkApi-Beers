@@ -172,6 +172,11 @@ class App extends React.Component {
     });
   };
 
+  // Reset Results on Reset Button
+  resetResults = () => {
+    this.setState({ beersFromSearchResults: [] });
+  };
+
   // Gets the next page of the resuls (right)
   paginateRight = () => {
     // eslint-disable-next-line
@@ -250,7 +255,7 @@ class App extends React.Component {
     return (
       <React.Fragment>
         <div className="container">
-          {/* Filter Div on the left */}
+          {/* Filter Component on the left */}
           <CSSTransition
             in={this.state.bringElements}
             timeout={1000}
@@ -262,11 +267,12 @@ class App extends React.Component {
             <Filters
               currentPage={this.state.currentPage}
               getBeersByName={this.getBeersByName}
+              resetResults={this.resetResults}
               getBeersByBrewDate={this.getBeersByBrewDate}
               getTenBeersByPage={this.getTenBeersByPage}
             />
           </CSSTransition>
-          {/* Results on the right */}
+          {/* Results on the display right */}
           <CSSTransition
             in={this.state.bringElements}
             timeout={1000}

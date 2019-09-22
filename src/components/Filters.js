@@ -53,7 +53,7 @@ class Filters extends React.Component {
       <React.Fragment>
         <div className="filters">
           <h2>Filter your List</h2>
-          {/* Beer Filter */}
+          {/* Name Filter */}
           <div className="filter">
             <h2>Beer Name</h2>
             <input
@@ -104,7 +104,12 @@ class Filters extends React.Component {
             <button
               onClick={e => {
                 e.preventDefault();
-                if (this.state.monthError || this.state.yearError) {
+                if (
+                  this.state.monthError ||
+                  this.state.yearError ||
+                  this.state.month === 0 ||
+                  this.state.year === 0
+                ) {
                   return;
                 } else {
                   this.props.getBeersByBrewDate(
@@ -120,7 +125,12 @@ class Filters extends React.Component {
             <button
               onClick={e => {
                 e.preventDefault();
-                if (this.state.monthError || this.state.yearError) {
+                if (
+                  this.state.monthError ||
+                  this.state.yearError ||
+                  this.state.month === 0 ||
+                  this.state.year === 0
+                ) {
                   return;
                 } else {
                   this.props.getBeersByBrewDate(
@@ -148,6 +158,7 @@ class Filters extends React.Component {
                 this.name.current.value = "";
                 this.month.current.value = "";
                 this.year.current.value = "";
+                this.props.resetResults();
                 this.props.getTenBeersByPage(this.props.currentPage);
                 this.setState({ monthError: false, yearError: false });
               }}
