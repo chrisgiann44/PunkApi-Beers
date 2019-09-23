@@ -5,9 +5,7 @@ let initialState = {
   yearBefore: "",
   monthAfter: "",
   yearAfter: "",
-  nameError: false,
-  monthError: false,
-  yearError: false
+  nameError: false
 };
 
 class Filters extends React.Component {
@@ -23,9 +21,7 @@ class Filters extends React.Component {
       yearBefore: "",
       monthAfter: "",
       yearAfter: "",
-      nameError: false,
-      monthError: false,
-      yearError: false
+      nameError: false
     };
   }
 
@@ -41,23 +37,28 @@ class Filters extends React.Component {
   };
 
   // Validates the month and returns true or false
-  validateMonth = ({ target: { value } }) => {
-    if (!value.match(/(^0?[1-9]$)|(^1[0-2]$)/) && value.length > 1) {
-      this.setState({ monthError: true });
+  validateMonth = ({ target }) => {
+    let error = target.name + "Error";
+    if (
+      !target.value.match(/(^0?[1-9]$)|(^1[0-2]$)/) &&
+      target.value.length > 1
+    ) {
+      this.setState({ [error]: true });
       return false;
     } else {
-      this.setState({ monthError: false });
+      this.setState({ [error]: false });
       return true;
     }
   };
 
   // Validates the year and returns true or false
-  validateYear = ({ target: { value } }) => {
-    if (!value.match(/(^[12][0-9]{3}$)/) && value.length > 3) {
-      this.setState({ yearError: true });
+  validateYear = ({ target }) => {
+    let error = target.name + "Error";
+    if (!target.value.match(/(^[12][0-9]{3}$)/) && target.value.length > 3) {
+      this.setState({ [error]: true });
       return false;
     } else {
-      this.setState({ yearError: false });
+      this.setState({ [error]: false });
       return true;
     }
   };
@@ -78,7 +79,6 @@ class Filters extends React.Component {
   };
 
   render() {
-    console.log(this.state);
     return (
       <React.Fragment>
         <div className="filters">
@@ -164,12 +164,12 @@ class Filters extends React.Component {
             >
               Apply Filter
             </button>
-            {this.state.monthError && (
+            {this.state.monthBeforeError || this.state.monthAfterError ? (
               <p style={{ color: "red" }}>Please insert a valid Month</p>
-            )}
-            {this.state.yearError && (
+            ) : null}
+            {this.state.yearBeforeError || this.state.yearAfterError ? (
               <p style={{ color: "red" }}>Please insert a valid Year</p>
-            )}
+            ) : null}
           </div>
           {/* Reset Button */}
           <div>
