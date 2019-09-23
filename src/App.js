@@ -124,10 +124,8 @@ class App extends React.Component {
         "-" +
         yearAfter;
     }
-    console.log(name.length);
 
     let finalUrl = name ? lastPartOfUrl + "&beer_name=" + name : lastPartOfUrl;
-    console.log(finalUrl);
 
     axios
       .get(`https://api.punkapi.com/v2/beers?page=1&per_page=80&${finalUrl}`)
@@ -172,9 +170,12 @@ class App extends React.Component {
       if (this.state.sortProperty === "first_brewed") {
         sorted = this.state.beersFromSearchResults.reverse();
       } else {
-        sorted = this.state.beersFromSearchResults.sort((a, b) =>
-          parseInt(a.first_brewed.slice(3) - parseInt(b.first_brewed.slice(3)))
+        sorted = this.state.beersFromSearchResults.sort(
+          (a, b) =>
+            parseInt(a.first_brewed.slice(3) + a.first_brewed.slice(0, 2)) -
+            parseInt(b.first_brewed.slice(3) + b.first_brewed.slice(0, 2))
         );
+        console.log(sorted);
       }
     }
     if (sortProperty === "abv") {
