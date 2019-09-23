@@ -80,117 +80,115 @@ class Filters extends React.Component {
 
   render() {
     return (
-      <React.Fragment>
-        <div className="filters">
-          <h2>Filter your List</h2>
-          {/* Name Filter */}
-          <div className="filter">
-            <h2>Beer Name</h2>
-            <input
-              placeholder="Enter the name of your Beer"
-              name="name"
-              ref={this.name}
-              onChange={e => {
-                this.monthBefore.current.value = "";
-                this.yearBefore.current.value = "";
-                this.monthAfter.current.value = "";
-                this.yearAfter.current.value = "";
-                if (this.validateName(e)) {
-                  this.setState({ ...initialState, name: e.target.value });
-                  this.props.getBeersByName(e.target.value);
-                }
-              }}
-            />
-            {this.state.nameError && (
-              <p style={{ color: "red" }}>Please insert a valid Name</p>
-            )}
-          </div>
-          {/* Date Filter */}
-          <div className="filter">
-            <h2>Brew Date</h2>
-            <p>Between</p>
-            <input
-              placeholder="MM"
-              name="monthAfter"
-              id="month"
-              ref={this.monthBefore}
-              maxLength="2"
-              onChange={this.handlechange}
-            />
-            <input
-              placeholder="YYYY"
-              name="yearAfter"
-              id="year"
-              ref={this.yearBefore}
-              maxLength="4"
-              onChange={this.handlechange}
-            />
-            <p>And</p>
-            <input
-              placeholder="MM"
-              name="monthBefore"
-              id="month"
-              ref={this.monthAfter}
-              maxLength="2"
-              onChange={this.handlechange}
-            />
-            <input
-              placeholder="YYYY"
-              name="yearBefore"
-              id="year"
-              ref={this.yearAfter}
-              maxLength="4"
-              onChange={this.handlechange}
-            />
-            <button
-              onClick={e => {
-                e.preventDefault();
-                if (
-                  this.state.monthError ||
-                  this.state.yearError ||
-                  (this.state.yearAfter === "" && this.state.yearBefore === "")
-                ) {
-                  return;
-                } else {
-                  this.props.getBeersByBrewDate(
-                    this.state.monthBefore || "01",
-                    this.state.yearBefore,
-                    this.state.monthAfter || "01",
-                    this.state.yearAfter,
-                    this.state.name
-                  );
-                }
-              }}
-            >
-              Apply Filter
-            </button>
-            {this.state.monthBeforeError || this.state.monthAfterError ? (
-              <p style={{ color: "red" }}>Please insert a valid Month</p>
-            ) : null}
-            {this.state.yearBeforeError || this.state.yearAfterError ? (
-              <p style={{ color: "red" }}>Please insert a valid Year</p>
-            ) : null}
-          </div>
-          {/* Reset Button */}
-          <div>
-            <button
-              onClick={e => {
-                e.preventDefault();
-                this.name.current.value = "";
-                this.monthBefore.current.value = "";
-                this.yearBefore.current.value = "";
-                this.monthAfter.current.value = "";
-                this.yearAfter.current.value = "";
-                this.props.resetResults();
-                this.props.getTenBeersByPage(this.props.currentPage);
-                this.setState(initialState);
-              }}
-            >
-              Reset Filters
-            </button>
-          </div>
+      <div className="filters" data-test="filters">
+        <h2>Filter your List</h2>
+        {/* Name Filter */}
+        <div className="filter">
+          <h2>Beer Name</h2>
+          <input
+            placeholder="Enter the name of your Beer"
+            name="name"
+            ref={this.name}
+            onChange={e => {
+              this.monthBefore.current.value = "";
+              this.yearBefore.current.value = "";
+              this.monthAfter.current.value = "";
+              this.yearAfter.current.value = "";
+              if (this.validateName(e)) {
+                this.setState({ ...initialState, name: e.target.value });
+                this.props.getBeersByName(e.target.value);
+              }
+            }}
+          />
+          {this.state.nameError && (
+            <p style={{ color: "red" }}>Please insert a valid Name</p>
+          )}
         </div>
-      </React.Fragment>
+        {/* Date Filter */}
+        <div className="filter">
+          <h2>Brew Date</h2>
+          <p>Between</p>
+          <input
+            placeholder="MM"
+            name="monthAfter"
+            id="month"
+            ref={this.monthBefore}
+            maxLength="2"
+            onChange={this.handlechange}
+          />
+          <input
+            placeholder="YYYY"
+            name="yearAfter"
+            id="year"
+            ref={this.yearBefore}
+            maxLength="4"
+            onChange={this.handlechange}
+          />
+          <p>And</p>
+          <input
+            placeholder="MM"
+            name="monthBefore"
+            id="month"
+            ref={this.monthAfter}
+            maxLength="2"
+            onChange={this.handlechange}
+          />
+          <input
+            placeholder="YYYY"
+            name="yearBefore"
+            id="year"
+            ref={this.yearAfter}
+            maxLength="4"
+            onChange={this.handlechange}
+          />
+          <button
+            onClick={e => {
+              e.preventDefault();
+              if (
+                this.state.monthError ||
+                this.state.yearError ||
+                (this.state.yearAfter === "" && this.state.yearBefore === "")
+              ) {
+                return;
+              } else {
+                this.props.getBeersByBrewDate(
+                  this.state.monthBefore || "01",
+                  this.state.yearBefore,
+                  this.state.monthAfter || "01",
+                  this.state.yearAfter,
+                  this.state.name
+                );
+              }
+            }}
+          >
+            Apply Filter
+          </button>
+          {this.state.monthBeforeError || this.state.monthAfterError ? (
+            <p style={{ color: "red" }}>Please insert a valid Month</p>
+          ) : null}
+          {this.state.yearBeforeError || this.state.yearAfterError ? (
+            <p style={{ color: "red" }}>Please insert a valid Year</p>
+          ) : null}
+        </div>
+        {/* Reset Button */}
+        <div>
+          <button
+            onClick={e => {
+              e.preventDefault();
+              this.name.current.value = "";
+              this.monthBefore.current.value = "";
+              this.yearBefore.current.value = "";
+              this.monthAfter.current.value = "";
+              this.yearAfter.current.value = "";
+              this.props.resetResults();
+              this.props.getTenBeersByPage(this.props.currentPage);
+              this.setState(initialState);
+            }}
+          >
+            Reset Filters
+          </button>
+        </div>
+      </div>
     );
   }
 }
