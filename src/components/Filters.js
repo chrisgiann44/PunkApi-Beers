@@ -5,6 +5,10 @@ let initialState = {
   yearBefore: "",
   monthAfter: "",
   yearAfter: "",
+  monthAfterError: false,
+  monthBeforeError: false,
+  yearAfterError: false,
+  yearBeforeError: false,
   nameError: false
 };
 
