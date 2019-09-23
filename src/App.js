@@ -167,6 +167,9 @@ class App extends React.Component {
       if (this.state.sortProperty === "first_brewed") {
         sorted = this.state.beersFromSearchResults.reverse();
       } else {
+        sorted = this.state.beersFromSearchResults.sort((a, b) =>
+          a.id < b.id ? -1 : a.id > b.id ? 1 : 0
+        );
         sorted = this.state.beersFromSearchResults.sort(
           (a, b) =>
             parseInt(
@@ -290,8 +293,6 @@ class App extends React.Component {
   }
 
   render() {
-    console.log(this.state.beers);
-
     return (
       <React.Fragment>
         <div className="container">

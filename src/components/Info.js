@@ -28,8 +28,10 @@ class Info extends React.Component {
           style={{
             display: "flex",
             flexDirection: "row",
-            margin: "1%",
-            height: "85%"
+            margin: "2%",
+            height: "85%",
+            justifyContent: "space-around",
+            paddingTop: "1%"
           }}
         >
           <img
