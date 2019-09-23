@@ -36,40 +36,23 @@ class Info extends React.Component {
             src={this.props.beer[0].image_url || "./beer_logo.jpg"}
             alt="Logo"
           ></img>
-          <div
-            style={{
-              textAlign: "left",
-              borderRadius: "25px",
-              paddingLeft: "2%",
-              marginLeft: "2%",
-              backgroundColor: "white",
-              width: "70%"
-            }}
-          >
-            <h2>
-              Name:<br></br> {this.props.beer[0].name}
-            </h2>
-            <h2>
-              Brewers Tips:<br></br> {this.props.beer[0].brewers_tips}
-            </h2>
-            <h2>
-              Ph:<br></br> {this.props.beer[0].ph}
-            </h2>
-            <h2>
-              SRM: <br></br>
-              {this.props.beer[0].srm}
-            </h2>
-            <h2>Can be combined with:</h2>
-            {this.props.beer[0].food_pairing.map(food => (
-              <ul>
-                <li key={food.id}>{food}</li>
-              </ul>
-            ))}
-            <h2>
-              Description:
-              <br></br>
-              {this.props.beer[0].description}}
-            </h2>
+          <div className="infocontainer">
+            <h2 className="item">Name:</h2>
+            <h3 className="item">{this.props.beer[0].name}</h3>
+            <h2 className="item">Ph:</h2>
+            <h3 className="item">{this.props.beer[0].ph}</h3>
+            <h2 className="item">SRM:</h2>
+            <h3 className="item">{this.props.beer[0].srm}</h3>
+            <h2 className="item">Brewers Tips:</h2>
+            <h3 className="item">{this.props.beer[0].brewers_tips}</h3>
+            <h2 className="item">Can be combined with:</h2>
+            <div className="item">
+              {this.props.beer[0].food_pairing.map(food => (
+                <h3 key={food.id}>{food}</h3>
+              ))}
+            </div>
+            <h2 className="item">Description:</h2>
+            <h3 className="item">{this.props.beer[0].description}</h3>
           </div>
         </div>
         {/* Arrows */}

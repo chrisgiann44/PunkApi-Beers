@@ -34,6 +34,35 @@ h2 {
   font-size: 20px;
 }
 
+.infocontainer {
+  display: grid;
+  grid-template-columns: 30% 70%;
+  grid-template-rows: 10%, 10%, 10%, 15%, 15%, 40%;
+  border-block-end: 3px black solid;
+  text-align: left;
+  border-radius: 25px;
+  background-color: white;
+  width: 70%;
+  vertical-align: middle;
+}
+
+.item {
+  background-color: #80cbc4;
+  border: 1px solid #fff;
+  padding-left: 20px;
+  font-size: 30px;
+  text-align: center;
+}
+
+.infocontainer h2 {
+  font-size: 28px;
+}
+
+.infocontainer h3,
+li {
+  font-size: 24px;
+}
+
 .display {
   position: relative;
   background-color: #3c9d9b;

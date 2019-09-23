@@ -156,11 +156,8 @@ class App extends React.Component {
     }
     if (sortProperty === "name") {
       if (this.state.sortProperty === "name") {
-        console.log("mesa");
-
         sorted = this.state.beersFromSearchResults.reverse();
       } else {
-        console.log("eksw");
         sorted = this.state.beersFromSearchResults.sort((a, b) =>
           a.name < b.name ? -1 : a.name > b.name ? 1 : 0
         );
@@ -172,10 +169,19 @@ class App extends React.Component {
       } else {
         sorted = this.state.beersFromSearchResults.sort(
           (a, b) =>
-            parseInt(a.first_brewed.slice(3) + a.first_brewed.slice(0, 2)) -
-            parseInt(b.first_brewed.slice(3) + b.first_brewed.slice(0, 2))
+            parseInt(
+              a.first_brewed.substr(a.first_brewed.length - 4) +
+                (a.first_brewed.slice(0, -5)
+                  ? a.first_brewed.slice(0, -5)
+                  : "01")
+            ) -
+            parseInt(
+              b.first_brewed.substr(a.first_brewed.length - 4) +
+                (b.first_brewed.slice(0, -5)
+                  ? b.first_brewed.slice(0, -5)
+                  : "01")
+            )
         );
-        console.log(sorted);
       }
     }
     if (sortProperty === "abv") {
@@ -284,6 +290,8 @@ class App extends React.Component {
   }
 
   render() {
+    console.log(this.state.beers);
+
     return (
       <React.Fragment>
         <div className="container">
