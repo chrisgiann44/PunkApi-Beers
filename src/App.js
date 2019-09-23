@@ -89,7 +89,8 @@ class App extends React.Component {
             numberOfResults: res.data.length,
             currentPage: 1
           });
-        });
+        })
+        .catch(err => console.log(err));
     } else {
       this.getTenBeersByPage(1);
       this.setState({
@@ -124,14 +125,10 @@ class App extends React.Component {
         "-" +
         yearAfter;
     }
-
     let finalUrl = name ? lastPartOfUrl + "&beer_name=" + name : lastPartOfUrl;
-
     axios
       .get(`https://api.punkapi.com/v2/beers?page=1&per_page=80&${finalUrl}`)
       .then(res => {
-        console.log(res.data);
-
         this.setState({
           beers: res.data.slice(0, 10),
           beersFromSearchResults: res.data,
@@ -139,7 +136,8 @@ class App extends React.Component {
           numberOfResults: res.data.length,
           sortProperty: ""
         });
-      });
+      })
+      .catch(err => console.log(err));
   };
 
   // Sort Results Function
