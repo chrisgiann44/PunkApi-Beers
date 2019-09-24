@@ -35,18 +35,6 @@ h2 {
   font-size: 20px;
 }
 
-.infocontainer {
-  display: grid;
-  grid-template-columns: 30% 70%;
-  grid-template-rows: 20%, 10%, 10%, 15%, 15%, 40%;
-  border-block-end: 3px black solid;
-  text-align: left;
-  border-radius: 25px;
-  background-color: white;
-  width: 70%;
-  height: 70%;
-}
-
 .item {
   background-color: #80cbc4;
   border: 1px solid #fff;
@@ -106,13 +94,7 @@ li {
   grid-template-columns: 7% 50% 20% 15% 15%;
 }
 
-.moreInfo img {
-  width: 15%;
-  height: 80%;
-}
-
 .moreInfo {
-  padding-left: 20px;
   border-radius: 30px;
   position: absolute;
   width: 90vw;
@@ -281,4 +263,57 @@ h2 {
   opacity: 0;
   transform: scale(0.7);
   transition: opacity 100ms, transform 100ms;
+}
+
+.infocontainer {
+  display: grid;
+  grid-template-columns: 30% 70%;
+  grid-template-rows: 20%, 10%, 10%, 15%, 15%, 40%;
+  border-block-end: 3px black solid;
+  text-align: left;
+  border-radius: 25px;
+  background-color: white;
+  width: 70%;
+  height: 90%;
+  overflow-y: scroll;
+}
+
+.popUpWindow {
+  display: flex;
+  flex-direction: column;
+  height: 95%;
+}
+
+.closeX {
+  margin-top: 1%;
+  cursor: pointer;
+  width: 15%;
+  align-self: flex-end;
+}
+
+.maincontainer {
+  display: flex;
+  flex-direction: row;
+  margin: 2%;
+  height: 85%;
+  justify-content: space-around;
+  padding-top: 1%;
+}
+
+.maincontainer img {
+  width: 20%;
+  height: 90%;
+}
+
+.arrowscontainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.arrow {
+  border-radius: 25px;
+  width: 60px;
+  cursor: pointer;
+  height: 60px;
 }

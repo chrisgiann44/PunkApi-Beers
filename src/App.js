@@ -286,8 +286,6 @@ class App extends React.Component {
   }
 
   render() {
-    console.log(this.state.beers);
-
     return (
       <React.Fragment>
         <div className="container">

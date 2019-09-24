@@ -8,32 +8,18 @@ class Info extends React.Component {
 
   render() {
     return (
-      <div style={{ display: "flex", flexDirection: "column", height: "95%" }}>
+      <div className="popUpWindow">
         {/* Close[X] */}
         <div
+          className="closeX"
           onClick={() => {
             this.props.toggle();
-          }}
-          style={{
-            marginTop: "1%",
-            cursor: "pointer",
-            width: "15%",
-            alignSelf: "flex-end"
           }}
         >
           Close[X]
         </div>
         {/* Info of the selected Beer */}
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            margin: "2%",
-            height: "85%",
-            justifyContent: "space-around",
-            paddingTop: "1%"
-          }}
-        >
+        <div className="maincontainer">
           <img
             src={this.props.beer[0].image_url || "./beer_logo.jpg"}
             alt="Logo"
@@ -58,22 +44,11 @@ class Info extends React.Component {
           </div>
         </div>
         {/* Arrows */}
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            justifyContent: "space-around"
-          }}
-        >
+        <div className="arrowscontainer">
           <img
+            className="arrow"
             onClick={() => {
               this.props.showNextBeerLeftOnPopup();
-            }}
-            style={{
-              borderRadius: "25px",
-              width: "60px",
-              cursor: "pointer",
-              height: "60px"
             }}
             src="leftarrow.png"
             alt="Arrow"
@@ -82,12 +57,7 @@ class Info extends React.Component {
             onClick={() => {
               this.props.showNextBeerRightOnPopup();
             }}
-            style={{
-              borderRadius: "25px",
-              width: "60px",
-              cursor: "pointer",
-              height: "60px"
-            }}
+            className="arrow"
             src="rightarrow.png"
             alt="Arrow"
           />
