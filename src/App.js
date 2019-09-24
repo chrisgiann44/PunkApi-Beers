@@ -378,7 +378,9 @@ class App extends React.Component {
                   </div>
                 </div>
                 {/* Results */}
-                {!this.state.beers.length && (
+                {!(
+                  this.state.beers.length || this.state.numberOfPages === 33
+                ) && (
                   <h1 style={{ color: "red" }}>
                     No Beers for you mate!Sorry! try again
                   </h1>
