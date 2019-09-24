@@ -218,8 +218,7 @@ class App extends React.Component {
 
   // Gets the next page of the resuls (right)
   paginateRight = () => {
-    // eslint-disable-next-line
-    if (this.state.currentPage == this.state.numberOfPages) {
+    if (this.state.currentPage === this.state.numberOfPages) {
       return;
     } else {
       if (!this.state.beersFromSearchResults.length) {
@@ -244,8 +243,7 @@ class App extends React.Component {
 
   // Gets the previous page of the resuls (left)
   paginateLeft = () => {
-    // eslint-disable-next-line
-    if (this.state.currentPage == 1) {
+    if (this.state.currentPage === 1) {
       return;
     } else {
       if (!this.state.beersFromSearchResults.length) {
@@ -291,6 +289,8 @@ class App extends React.Component {
   }
 
   render() {
+    console.log(this.state.beers);
+
     return (
       <React.Fragment>
         <div className="container">

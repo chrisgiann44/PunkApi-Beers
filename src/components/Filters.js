@@ -149,8 +149,10 @@ class Filters extends React.Component {
             onClick={e => {
               e.preventDefault();
               if (
-                this.state.monthError ||
-                this.state.yearError ||
+                this.state.monthBeforeError ||
+                this.state.yearBeroreError ||
+                this.state.yearAfterError ||
+                this.state.yearAfterError ||
                 (this.state.yearAfter === "" && this.state.yearBefore === "")
               ) {
                 return;
