@@ -179,6 +179,7 @@ class Filters extends React.Component {
         {/* Reset Button */}
         <div>
           <button
+            className="resetButton"
             onClick={e => {
               e.preventDefault();
               this.name.current.value = "";

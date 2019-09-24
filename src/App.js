@@ -286,7 +286,7 @@ class App extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <div className="container">
+        <div className="container" data-test="container">
           {/* Filter Component on the left */}
           <CSSTransition
             in={this.state.bringElements}
