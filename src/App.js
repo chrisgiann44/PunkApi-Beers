@@ -40,31 +40,28 @@ class App extends React.Component {
 
   // Brings the next beer (right) on the popup window
   showNextBeerRightOnPopup = () => {
-    if (
-      this.state.beers.indexOf(this.state.beerToShow[0]) ===
-      this.state.beers.length - 1
-    ) {
+    let allBeers = this.state.beers;
+    let beerToShow = this.state.beerToShow;
+    if (allBeers.indexOf(beerToShow[0]) === allBeers.length - 1) {
       return;
     }
     this.setState({
-      beerToShow: this.state.beers.filter(
-        beer =>
-          this.state.beers.indexOf(beer) ===
-          this.state.beers.indexOf(this.state.beerToShow[0]) + 1
+      beerToShow: allBeers.filter(
+        beer => allBeers.indexOf(beer) === allBeers.indexOf(beerToShow[0]) + 1
       )
     });
   };
 
   // Brings the previous beer (left) on the popup window
   showNextBeerLeftOnPopup = () => {
-    if (this.state.beers.indexOf(this.state.beerToShow[0]) === 0) {
+    let allBeers = this.state.beers;
+    let beerToShow = this.state.beerToShow;
+    if (allBeers.indexOf(beerToShow[0]) === 0) {
       return;
     }
     this.setState({
-      beerToShow: this.state.beers.filter(
-        beer =>
-          this.state.beers.indexOf(beer) ===
-          this.state.beers.indexOf(this.state.beerToShow[0]) - 1
+      beerToShow: allBeers.filter(
+        beer => allBeers.indexOf(beer) === allBeers.indexOf(beerToShow[0]) - 1
       )
     });
   };
@@ -215,24 +212,24 @@ class App extends React.Component {
 
   // Gets the next page of the resuls (right)
   paginateRight = () => {
-    if (this.state.currentPage === this.state.numberOfPages) {
+    let currPag = this.state.currentPage;
+    let numOfPag = this.state.numberOfPages;
+    let res = this.state.beersFromSearchResults;
+    if (currPag === numOfPag) {
       return;
     } else {
-      if (!this.state.beersFromSearchResults.length) {
-        this.getTenBeersByPage(this.state.currentPage + 1);
+      if (!res.length) {
+        this.getTenBeersByPage(currPag + 1);
         this.setState({
-          currentPage: this.state.currentPage + 1
+          currentPage: currPag + 1
         });
       } else {
-        const startSliceFrom = this.state.beersFromSearchResults.indexOf(
+        const startSliceFrom = res.indexOf(
           this.state.beers[this.state.beers.length - 1]
         );
         this.setState({
-          currentPage: this.state.currentPage + 1,
-          beers: this.state.beersFromSearchResults.slice(
-            startSliceFrom + 1,
-            startSliceFrom + 11
-          )
+          currentPage: currPag + 1,
+          beers: res.slice(startSliceFrom + 1, startSliceFrom + 11)
         });
       }
     }

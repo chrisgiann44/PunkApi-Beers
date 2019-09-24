@@ -85,7 +85,6 @@ h2 {
 }
 
 .filter {
-  border: 2px solid black;
   margin-bottom: 15px 5px 15px 5px;
   text-align: center;
   display: flex;
@@ -365,7 +364,6 @@ li {
   }
   
   .filter {
-    border: 2px solid black;
     margin: 2px 5px 2px 5px;
     border: px solid black;
     display: flex;
