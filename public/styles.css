@@ -8,6 +8,10 @@ body {
   background-size: cover;
 }
 
+#root{
+  height: 75vh;
+}
+
 body h1 {
   color: white;
   font-size: 50px;
@@ -34,12 +38,14 @@ li {
 .container {
   display: flex;
   justify-content: space-evenly;
+  height: 100%;
 }
 
 /* Filter Box*/
 .filters {
   background-color: #52de97;
   width: 20%;
+  height: 100%;
   border-radius: 25px;
   box-shadow: 10px 9px 22px 2px rgba(255, 255, 255, 0.75);
 }
@@ -96,6 +102,7 @@ h2 {
 /* Main results Display*/
 
 .display {
+  justify-content: space-between;
   display: flex;
   flex-direction: column;
   background-color: #3c9d9b;
@@ -312,10 +319,15 @@ li {
 
 /*CSS for mobiles*/
 @media (max-width: 550px) {
-  
+
+  #root{
+    height: 85vh;
+  }
+
   body h1 {
     color: white;
-    font-size: 20px;
+    font-size: 30px;
+    margin-bottom: 25px;
   }
   
   h2 {
@@ -332,6 +344,7 @@ li {
   /* Filter Box*/
   .filters {
    width: 90%;
+   height: 50%;
    margin-bottom: 8px;
    align-self:center;
   }
@@ -378,13 +391,25 @@ li {
   .display {
     width: 95%;
     padding: 1%;
+    height: 60%;
     align-self: center;
+  }
+
+  .beername{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
   
   .result {
     margin-bottom: 1px;
     font-size: 12px;
     padding: 1px;
+  }
+
+  .results {
+    overflow-y: scroll;
+    height: 90%;
   }
   
   .header {

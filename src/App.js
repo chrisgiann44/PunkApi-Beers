@@ -313,8 +313,8 @@ class App extends React.Component {
             unmountOnExit
           >
             <div className="display">
-              <div className="results">
-                {/* Header */}
+              {/* Header */}
+              <div>
                 <div className=" header">
                   <div>
                     {!!this.state.beersFromSearchResults.length && (
@@ -377,28 +377,32 @@ class App extends React.Component {
                     IBU
                   </div>
                 </div>
-                {/* Results */}
-                {!(
-                  this.state.beers.length || this.state.numberOfPages === 33
-                ) && (
-                  <h1 style={{ color: "red" }}>
-                    No Beers for you mate!Sorry! try again
-                  </h1>
-                )}
-                {this.state.beers.map(beer => (
-                  <div
-                    className="result"
-                    id={beer.id}
-                    key={beer.id}
-                    onClick={this.setBeerToShow}
-                  >
-                    <div id={beer.id}>{beer.id}</div>
-                    <div id={beer.id}>{beer.name}</div>
-                    <div id={beer.id}>{beer.first_brewed}</div>
-                    <div id={beer.id}>{beer.abv}</div>
-                    <div id={beer.id}>{beer.ibu}</div>
-                  </div>
-                ))}
+                <div className="results">
+                  {/* Results */}
+                  {!(
+                    this.state.beers.length || this.state.numberOfPages === 33
+                  ) && (
+                    <h1 style={{ color: "red" }}>
+                      No Beers for you mate!Sorry! try again
+                    </h1>
+                  )}
+                  {this.state.beers.map(beer => (
+                    <div
+                      className="result"
+                      id={beer.id}
+                      key={beer.id}
+                      onClick={this.setBeerToShow}
+                    >
+                      <div id={beer.id}>{beer.id}</div>
+                      <div className="beername" id={beer.id}>
+                        {beer.name}
+                      </div>
+                      <div id={beer.id}>{beer.first_brewed}</div>
+                      <div id={beer.id}>{beer.abv}</div>
+                      <div id={beer.id}>{beer.ibu}</div>
+                    </div>
+                  ))}
+                </div>
               </div>
               {/* Pagination */}
               {!!this.state.beers.length && (
