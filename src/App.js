@@ -23,8 +23,7 @@ class App extends React.Component {
   setBeerToShow = e => {
     this.setState({
       beerToShow: this.state.beers.filter(
-        // eslint-disable-next-line
-        beer => beer.id == e.target.id
+        beer => beer.id === parseInt(e.target.id)
       )
     });
     this.toggleInfo();
@@ -42,8 +41,7 @@ class App extends React.Component {
   // Brings the next beer (right) on the popup window
   showNextBeerRightOnPopup = () => {
     if (
-      // eslint-disable-next-line
-      this.state.beers.indexOf(this.state.beerToShow[0]) ==
+      this.state.beers.indexOf(this.state.beerToShow[0]) ===
       this.state.beers.length - 1
     ) {
       return;
@@ -51,8 +49,7 @@ class App extends React.Component {
     this.setState({
       beerToShow: this.state.beers.filter(
         beer =>
-          // eslint-disable-next-line
-          this.state.beers.indexOf(beer) ==
+          this.state.beers.indexOf(beer) ===
           this.state.beers.indexOf(this.state.beerToShow[0]) + 1
       )
     });
@@ -60,15 +57,13 @@ class App extends React.Component {
 
   // Brings the previous beer (left) on the popup window
   showNextBeerLeftOnPopup = () => {
-    // eslint-disable-next-line
-    if (this.state.beers.indexOf(this.state.beerToShow[0]) == 0) {
+    if (this.state.beers.indexOf(this.state.beerToShow[0]) === 0) {
       return;
     }
     this.setState({
       beerToShow: this.state.beers.filter(
         beer =>
-          // eslint-disable-next-line
-          this.state.beers.indexOf(beer) ==
+          this.state.beers.indexOf(beer) ===
           this.state.beers.indexOf(this.state.beerToShow[0]) - 1
       )
     });
