@@ -416,6 +416,11 @@ li {
   .infocontainer h2 {
     font-size: 14px;
   }
+  .item {
+    padding-left: 1px;
+    padding-top: 1px;
+    text-align: center;
+  }
   
   .infocontainer h3,
   li {
