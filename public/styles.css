@@ -3,7 +3,7 @@ body {
   margin: 0;
   text-align: center;
   max-height: 100vh;
-  overflow: hidden;
+  overflow-x: hidden;
   background-image: url("back.jpeg");
   background-size: cover;
 }
