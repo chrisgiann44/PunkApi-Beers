@@ -8,7 +8,7 @@ body {
   background-size: cover;
 }
 
-#root{
+#root {
   height: 75vh;
 }
 
@@ -319,8 +319,7 @@ li {
 
 /*CSS for mobiles*/
 @media (max-width: 550px) {
-
-  #root{
+  #root {
     height: 85vh;
   }
 
@@ -329,53 +328,53 @@ li {
     font-size: 30px;
     margin-bottom: 25px;
   }
-  
+
   h2 {
     padding: 0;
     margin-top: 1px;
   }
-  
+
   /*general container css*/
-  
+
   .container {
     flex-direction: column;
   }
-  
+
   /* Filter Box*/
   .filters {
-   width: 90%;
-   height: 50%;
-   margin-bottom: 8px;
-   align-self:center;
+    width: 90%;
+    height: 50%;
+    margin-bottom: 8px;
+    align-self: center;
   }
-  
+
   .filter p,
   h2 {
     margin: 0px;
   }
-  
+
   .filter p {
     font-size: 12px;
   }
-  
+
   .filters h1 {
     font-size: 15px;
   }
-  
+
   .filters h2 {
     font-size: 14px;
   }
-  
-   .filters input {
+
+  .filters input {
     font-size: 15px;
     margin-top: 1px;
   }
-  
+
   .filters button {
     font-size: 15px;
     margin-top: 1px;
   }
-  
+
   .filter {
     margin: 2px 5px 2px 5px;
     border: px solid black;
@@ -385,9 +384,9 @@ li {
     border-radius: 10px;
     text-align: center;
   }
-  
+
   /* Main results Display*/
-  
+
   .display {
     width: 95%;
     padding: 1%;
@@ -395,12 +394,12 @@ li {
     align-self: center;
   }
 
-  .beername{
+  .beername {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
   }
-  
+
   .result {
     margin-bottom: 1px;
     font-size: 12px;
@@ -411,16 +410,16 @@ li {
     overflow-y: scroll;
     height: 90%;
   }
-  
+
   .header {
     font-size: 13px;
     padding: 5px;
   }
-  
+
   .pagination {
     font-size: 12px;
   }
-  
+
   .pagination p {
     margin-right: 25px;
   }
@@ -429,13 +428,13 @@ li {
     width: 12px;
     height: 12px;
   }
-  
+
   /* PopUpWindow CSS*/
-  
+
   .moreInfo {
     border: 2px solid black;
   }
-  
+
   .infocontainer h2 {
     font-size: 12px;
   }
@@ -445,21 +444,18 @@ li {
     padding-left: 0px;
     text-overflow: clip;
   }
-  .infocontainer{
+  .infocontainer {
     border-radius: 0;
   }
-  
+
   .infocontainer h3,
   li {
     font-size: 10px;
   }
-  
+
   .arrow {
     border-radius: 12px;
     width: 30px;
     height: 30px;
-  }}
-  .closeX {
-    padding-right: 25px;
   }
 }
