@@ -126,7 +126,8 @@ class App extends React.Component {
           beersFromSearchResults: res.data,
           numberOfPages: Math.ceil(res.data.length / 10),
           numberOfResults: res.data.length,
-          sortProperty: ""
+          sortProperty: "",
+          currentPage: 1
         });
       })
       .catch(err => console.log(err));
