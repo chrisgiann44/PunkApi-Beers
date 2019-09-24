@@ -237,20 +237,20 @@ class App extends React.Component {
 
   // Gets the previous page of the resuls (left)
   paginateLeft = () => {
-    if (this.state.currentPage === 1) {
+    let currPag = this.state.currentPage;
+    let res = this.state.beersFromSearchResults;
+    if (currPag === 1) {
       return;
     } else {
-      if (!this.state.beersFromSearchResults.length) {
-        this.getTenBeersByPage(this.state.currentPage - 1);
+      if (!res.length) {
+        this.getTenBeersByPage(currPag - 1);
         this.setState({
-          currentPage: this.state.currentPage - 1
+          currentPage: currPag - 1
         });
       } else {
-        const startSliceFrom = this.state.beersFromSearchResults.indexOf(
-          this.state.beers[0]
-        );
+        const startSliceFrom = res.indexOf(this.state.beers[0]);
         this.setState({
-          currentPage: this.state.currentPage - 1,
+          currentPage: currPag - 1,
           beers: this.state.beersFromSearchResults.slice(
             startSliceFrom - 10,
             startSliceFrom
