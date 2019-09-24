@@ -414,17 +414,21 @@ li {
   }
   
   .infocontainer h2 {
-    font-size: 14px;
+    font-size: 12px;
   }
   .item {
-    padding-left: 1px;
     padding-top: 1px;
-    text-align: center;
+    text-align: left;
+    padding-left: 0px;
+    text-overflow: clip;
+  }
+  .infocontainer{
+    border-radius: 0;
   }
   
   .infocontainer h3,
   li {
-    font-size: 13px;
+    font-size: 10px;
   }
   
   .arrow {
@@ -432,4 +436,7 @@ li {
     width: 30px;
     height: 30px;
   }}
+  .closeX {
+    padding-right: 25px;
+  }
 }
