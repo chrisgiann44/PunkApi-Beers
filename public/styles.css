@@ -112,6 +112,11 @@ h2 {
   border-radius: 25px;
   box-shadow: 10px 9px 22px 2px rgba(255, 255, 255, 0.75);
 }
+.beername {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
 
 .result {
   background-color: white;
@@ -249,8 +254,8 @@ h2 {
 
 .infocontainer {
   display: grid;
-  grid-template-columns: 30% 70%;
-  grid-template-rows: 20%, 10%, 10%, 15%, 15%, 40%;
+  grid-template-columns: 35% 65%;
+  grid-template-rows: 10% 10% 10% auto auto auto;
   border-block-end: 3px black solid;
   text-align: left;
   border-radius: 25px;
@@ -266,7 +271,6 @@ h2 {
   padding-left: 20px;
   font-size: 30px;
   padding-top: 1%;
-  text-align: center;
 }
 
 .infocontainer h2 {
@@ -319,7 +323,7 @@ li {
 }
 
 /*CSS for mobiles*/
-@media (max-width: 550px) {
+@media (max-width: 1000px) {
   #root {
     height: 85vh;
   }
@@ -442,7 +446,7 @@ li {
   .item {
     padding-top: 1px;
     text-align: left;
-    padding-left: 0px;
+    padding-left: 5px;
     text-overflow: clip;
   }
   .infocontainer {
@@ -458,5 +462,12 @@ li {
     border-radius: 12px;
     width: 30px;
     height: 30px;
+  }
+  .closeX {
+    margin-top: 1%;
+    cursor: pointer;
+    width: 15%;
+    padding-right: 10%;
+    align-self: flex-end;
   }
 }

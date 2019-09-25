@@ -31,7 +31,7 @@ class Filters extends React.Component {
 
   // Validates the name and returns true or false
   validateName = ({ target: { value } }) => {
-    if (!value.match(/^[a-zA-Z]+$/) && value !== "") {
+    if (!value.match(/^[a-zA-Z ]+$/) && value !== "") {
       this.setState({ nameError: true });
       return false;
     } else {
