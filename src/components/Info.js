@@ -36,7 +36,7 @@ class Info extends React.Component {
             <h2 className="item">Can be combined with:</h2>
             <div className="item">
               {this.props.beer[0].food_pairing.map(food => (
-                <h3 key={food.id}>{food}</h3>
+                <h3 key={"key" + food}>{food}</h3>
               ))}
             </div>
             <h2 className="item">Description:</h2>

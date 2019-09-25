@@ -274,7 +274,8 @@ class App extends React.Component {
             numberOfPages: 33,
             numberOfResults: 325
           });
-        });
+        })
+        .catch(err => console.log(err));
     }
   };
 
@@ -383,13 +384,14 @@ class App extends React.Component {
                   {!(
                     this.state.beers.length || this.state.numberOfPages === 33
                   ) && (
-                    <h1 style={{ color: "red" }}>
+                    <h1 data-test="error" style={{ color: "red" }}>
                       No Beers for you mate!Sorry! try again
                     </h1>
                   )}
                   {this.state.beers.map(beer => (
                     <div
                       className="result"
+                      data-test="result"
                       id={beer.id}
                       key={beer.id}
                       onClick={this.setBeerToShow}
@@ -407,7 +409,7 @@ class App extends React.Component {
               </div>
               {/* Pagination */}
               {!!this.state.beers.length && (
-                <div className="pagination">
+                <div data-test="pagination" className="pagination">
                   <h4 onClick={this.paginateLeft}>{"<<"} Prev</h4>
                   <p>{this.state.currentPage}</p>
                   {this.state.numberOfPages !== 0 && (

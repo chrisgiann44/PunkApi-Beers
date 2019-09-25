@@ -1,5 +1,5 @@
 import React from "react";
-import { shallow } from "enzyme";
+import { shallow, mount } from "enzyme";
 import Filters from "./Filters";
 import "../setupTest";
 
@@ -41,5 +41,13 @@ describe("Filter Component", () => {
     expect(
       instance.validateYear({ target: { value: "2000", name: "Before" } })
     ).toBe(true);
+  });
+
+  test("user text is echoed", () => {
+    const wrapper = mount(<Filters getBeersByName={() => {}} />);
+    wrapper.find("input.jestTestName").simulate("change", {
+      target: { value: "name" }
+    });
+    expect(wrapper.state().name).toBe("name");
   });
 });

@@ -92,6 +92,7 @@ class Filters extends React.Component {
           <input
             placeholder="Enter the name of your Beer"
             name="name"
+            className="jestTestName"
             ref={this.name}
             onChange={e => {
               this.monthBefore.current.value = "";
