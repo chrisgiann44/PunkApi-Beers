@@ -68,7 +68,7 @@ class App extends React.Component {
 
   // Get results of beers based on the name
   getBeersByName = name => {
-    if (name.length > 2) {
+    if (name.length > 1) {
       axios
         .get(
           `https://api.punkapi.com/v2/beers?beer_name=${name}&page=1&per_page=80`
