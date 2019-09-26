@@ -168,12 +168,16 @@ class Filters extends React.Component {
               if (
                 this.state.monthBeforeError ||
                 this.state.yearBeroreError ||
-                this.state.yearAfterError ||
+                this.state.monthAfterError ||
                 this.state.yearAfterError ||
                 (this.state.yearAfter === "" && this.state.yearBefore === "")
               ) {
+                console.log(1);
+
                 return;
               } else {
+                console.log(8);
+
                 this.props.getBeersByBrewDate(
                   this.state.monthBefore || "01",
                   this.state.yearBefore,
