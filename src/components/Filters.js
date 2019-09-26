@@ -43,15 +43,20 @@ class Filters extends React.Component {
   // Validates the month and returns true or false
   validateMonth = ({ target }) => {
     let error = target.name + "Error";
-    if (
-      !target.value.match(/(^0?[1-9]$)|(^1[0-2]$)/) &&
-      target.value.length > 1
-    ) {
-      this.setState({ [error]: true });
-      return false;
-    } else {
+    if (target.value === "") {
       this.setState({ [error]: false });
       return true;
+    } else {
+      if (
+        !target.value.match(/(^0?[1-9]$)|(^1[0-2]$)/) &&
+        typeof target.value === "string"
+      ) {
+        this.setState({ [error]: true });
+        return false;
+      } else {
+        this.setState({ [error]: false });
+        return true;
+      }
     }
   };
 
