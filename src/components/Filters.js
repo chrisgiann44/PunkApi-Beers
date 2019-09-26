@@ -49,8 +49,11 @@ class Filters extends React.Component {
     } else {
       if (
         !target.value.match(/(^0?[1-9]$)|(^1[0-2]$)/) &&
-        typeof target.value === "string"
+        target.value.length > 1
       ) {
+        this.setState({ [error]: true });
+        return false;
+      } else if (isNaN(parseInt(target.value))) {
         this.setState({ [error]: true });
         return false;
       } else {
@@ -63,12 +66,20 @@ class Filters extends React.Component {
   // Validates the year and returns true or false
   validateYear = ({ target }) => {
     let error = target.name + "Error";
-    if (!target.value.match(/(^[12][0-9]{3}$)/) && target.value.length > 3) {
-      this.setState({ [error]: true });
-      return false;
-    } else {
+    if (target.value === "") {
       this.setState({ [error]: false });
       return true;
+    } else {
+      if (!target.value.match(/(^[12][0-9]{3}$)/) && target.value.length > 3) {
+        this.setState({ [error]: true });
+        return false;
+      } else if (isNaN(parseInt(target.value))) {
+        this.setState({ [error]: true });
+        return false;
+      } else {
+        this.setState({ [error]: false });
+        return true;
+      }
     }
   };
 
