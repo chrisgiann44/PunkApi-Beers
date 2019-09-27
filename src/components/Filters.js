@@ -167,9 +167,13 @@ class Filters extends React.Component {
             onClick={e => {
               e.preventDefault();
               if (
-                this.state.yearAfter > this.state.yearBefore ||
+                (this.state.yearAfter > this.state.yearBefore &&
+                  this.state.yearBefore !== "") ||
                 (this.state.yearAfter === this.state.yearBefore &&
-                  this.state.monthAfter > this.state.monthBefore)
+                  this.state.monthAfter > this.state.monthBefore) ||
+                (this.state.yearAfter === this.state.yearBefore &&
+                  (this.state.monthAfter === "" ||
+                    this.state.monthBefore === ""))
               ) {
                 this.setState({ yearRangeError: true });
                 return;
