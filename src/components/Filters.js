@@ -9,7 +9,8 @@ let initialState = {
   monthBeforeError: false,
   yearAfterError: false,
   yearBeforeError: false,
-  nameError: false
+  nameError: false,
+  yearRangeError: false
 };
 
 class Filters extends React.Component {
@@ -165,26 +166,28 @@ class Filters extends React.Component {
           <button
             onClick={e => {
               e.preventDefault();
-              if (
-                this.state.monthBeforeError ||
-                this.state.yearBeroreError ||
-                this.state.monthAfterError ||
-                this.state.yearAfterError ||
-                (this.state.yearAfter === "" && this.state.yearBefore === "")
-              ) {
-                console.log(1);
-
+              if (this.state.yearAfter > this.state.yearBefore) {
+                this.setState({ yearRangeError: true });
                 return;
               } else {
-                console.log(8);
-
-                this.props.getBeersByBrewDate(
-                  this.state.monthBefore || "01",
-                  this.state.yearBefore,
-                  this.state.monthAfter || "01",
-                  this.state.yearAfter,
-                  this.state.name
-                );
+                this.setState({ yearRangeError: false });
+                if (
+                  this.state.monthBeforeError ||
+                  this.state.yearBeroreError ||
+                  this.state.monthAfterError ||
+                  this.state.yearAfterError ||
+                  (this.state.yearAfter === "" && this.state.yearBefore === "")
+                ) {
+                  return;
+                } else {
+                  this.props.getBeersByBrewDate(
+                    this.state.monthBefore || "01",
+                    this.state.yearBefore,
+                    this.state.monthAfter || "01",
+                    this.state.yearAfter,
+                    this.state.name
+                  );
+                }
               }
             }}
           >
@@ -196,6 +199,9 @@ class Filters extends React.Component {
           {this.state.yearBeforeError || this.state.yearAfterError ? (
             <p style={{ color: "red" }}>Please insert a valid Year</p>
           ) : null}
+          {this.state.yearRangeError && (
+            <p style={{ color: "red" }}>Please insert a valid Year Range</p>
+          )}
         </div>
         {/* Reset Button */}
         <div>
