@@ -166,7 +166,11 @@ class Filters extends React.Component {
           <button
             onClick={e => {
               e.preventDefault();
-              if (this.state.yearAfter > this.state.yearBefore) {
+              if (
+                this.state.yearAfter > this.state.yearBefore ||
+                (this.state.yearAfter === this.state.yearBefore &&
+                  this.state.monthAfter > this.state.monthBefore)
+              ) {
                 this.setState({ yearRangeError: true });
                 return;
               } else {
